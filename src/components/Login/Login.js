@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../../pages/AuthContext";
 import "./Login.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -12,21 +13,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 
 function LogIn() {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const context = useContext(AuthContext);
 
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
 
   const handleLogin = () => {
-    const correctEmail = "user@example.com";
-    const correctPassword = "password123";
-    if (email === correctEmail && pass === correctPassword) {
-      dispatch({ type: "SUCCESS" });
+    if (context.HandleLogin(email, pass)) {
       navigate("/dashboard");
-    } else {
-      dispatch({ type: "FAILURE" });
-      alert("Sai thông tin, vui lòng nhập lại");
     }
   };
   return (

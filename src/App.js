@@ -1,15 +1,14 @@
 // App.js
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Provider } from "react-redux";
-import store from "./pages/store";
 import LogIn from "./pages/LogIn";
 import Dashboard from "./pages/Dashboard";
+import { AuthProvider } from "./pages/AuthContext";
 import ProtectedRoute from "./pages/ProtectRoutes";
 
 function App() {
   return (
-    <Provider store={store}>
+    <AuthProvider>
       <Router>
         <Routes>
           <Route index element={<LogIn />} />
@@ -23,7 +22,7 @@ function App() {
           />
         </Routes>
       </Router>
-    </Provider>
+    </AuthProvider>
   );
 }
 
