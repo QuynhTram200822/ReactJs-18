@@ -24,6 +24,9 @@ function LogIn() {
       navigate("/dashboard");
     }
   };
+  if (context.login) {
+    navigate("/success");
+  }
   return (
     <div className="App ">
       <div className="container ">
