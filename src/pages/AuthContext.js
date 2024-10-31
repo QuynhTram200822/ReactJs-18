@@ -1,10 +1,11 @@
 import React, { createContext, useState } from "react";
+import Cookies from "js-cookie";
 
 const AuthContext = createContext();
 
 function AuthProvider({ children }) {
   const [login, setLogin] = useState(() => {
-    return localStorage.getItem("login") === "true";
+    return Cookies.get("login") === "true";
   });
 
   const HandleLogin = (email, pass) => {
@@ -12,7 +13,7 @@ function AuthProvider({ children }) {
     const correctPassword = "password123";
     if (email === correctEmail && pass === correctPassword) {
       setLogin(true);
-      localStorage.setItem("login", "true");
+      Cookies.set("login", "true");
       return true;
     } else {
       alert("Sai thông tin, vui lòng nhập lại");
